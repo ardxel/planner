@@ -1,8 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-
-const getImage = (url: string) => {
-  return new URL(url, import.meta.url).href;
-}
+import {basketListConfig} from "./basketListConfig.ts";
 
 export interface PlannerItem {
   index: number,
@@ -24,39 +21,7 @@ interface PlannerState {
 }
 
 const initialState: PlannerState = {
-  // TODO
-  basket_items: [
-    {
-      index: 1,
-      src: getImage('../../../assets/couch.png'),
-      title: 'item 1'
-    },
-    {
-      index: 2,
-      src: getImage('../../../assets/chair.jpg'),
-      title: 'item 2'
-    },
-    {
-      index: 3,
-      src: getImage('../../../assets/closet.jpg'),
-      title: 'item 3'
-    },
-    {
-      index: 4,
-      src: getImage('../../../assets/sink.png'),
-      title: 'item 4'
-    },
-    {
-      index: 5,
-      src: getImage('../../../assets/table.jpg'),
-      title: 'item 5'
-    },
-    {
-      index: 6,
-      src: getImage('../../../assets/tv.jpg'),
-      title: 'item 6'
-    }
-  ],
+  basket_items: basketListConfig,
   field_items: [],
   selected: null
 }
@@ -67,6 +32,7 @@ type ChangeFieldListPayload = PayloadAction<{ index: PlannerItem['index'], posit
 type SelectFieldItem = AddFieldItemPayload
 type SetImportedField = PayloadAction<FieldItem[]>
 type DeleteFieldItem = AddFieldItemPayload
+
 const plannerSlice = createSlice({
   name: 'planner',
   initialState: initialState,
@@ -77,13 +43,9 @@ const plannerSlice = createSlice({
     changeFieldItem: (state, action: ChangeFieldListPayload) => {
       const {position, index} = action.payload;
       state.field_items = state.field_items.map((item) => {
-        if (item.index === index) {
-          return {
-            ...item,
-            position
-          }
-        }
-        return item;
+        return item.index === index
+          ? {...item, position}
+          : item
       })
     },
     selectFieldItem: (state, action: SelectFieldItem) => {
