@@ -6,7 +6,7 @@ import Field from "./field";
 const PlannerWrapper = styled.div`
   width: 100%;
   max-width: 1440px;
-  height: 50vh;
+  height: 700px;
   margin: 0 auto;
   display: grid;
   background: #f3f3f3;
