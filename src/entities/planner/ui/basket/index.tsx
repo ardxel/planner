@@ -106,7 +106,8 @@ const Basket: FC<BasketProps> = ({}) => {
           {basket_items.map((item) => {
             return (
               <SwiperSlide key={item.index}>
-                <PlannerItem disabled={true} onClick={() => pushFieldItem(item.index)} src={item.src} />
+                {/* @ts-ignore */}
+                <PlannerItem disabled={true} onClick={() => pushFieldItem(item.index)} src={item.src}  />
               </SwiperSlide>
             )
           })}

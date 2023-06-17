@@ -17,7 +17,7 @@ const FieldWrapper = styled.div`
 
 type FieldProps = {}
 
-const Field: FC<FieldProps> = (props) => {
+const Field: FC<FieldProps> = () => {
   const {field_items} = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
@@ -46,6 +46,7 @@ const Field: FC<FieldProps> = (props) => {
         defaultPosition: {x: item.position.x, y: item.position.y}
 
       }
+      // @ts-ignore
       return <PlannerItem { ...props }  />
     }) }
   </FieldWrapper>
